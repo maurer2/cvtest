@@ -1,8 +1,8 @@
+const chromeLauncher = require('chrome-launcher');
+
 module.exports = {
     launchChrome: () => {
-        const chromeLauncher = require('chrome-launcher');
         //const hasLoaded = new Promise();
-
         return chromeLauncher.launch({
             startingUrl: 'about:blank',
             chromeFlags: ['--headless', '--disable-gpu'],
@@ -19,6 +19,6 @@ module.exports = {
     }
 }
 
-if(require.main == module) {
+if (require.main == module) {
     module.exports.launchChrome();
 }
