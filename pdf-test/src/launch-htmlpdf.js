@@ -12,12 +12,12 @@ fs.readFileAsync('cv.html', 'utf8').then((data) => {
         displayHeaderFooter: false,
         printBackground: true,
         scale: 1,
-        paperWidth: 7.48, // A4 - 2cm
-        paperHeight: 11.69, // A4 -2 cm
-        marginTop: 0,
-        marginBottom: 0,
-        marginLeft: 10,
-        marginRight: 0,
+        paperWidth: 8.267, // A4
+        paperHeight: 11.692, // A4
+        marginTop: 0.394, // 1cm = 0.394 inch
+        marginBottom: 0.394, // 1cm = 0.394 inch
+        marginLeft: 0.394, // 1cm = 0.394 inch
+        marginRight: 0.394, // 1cm = 0.394 inch
         pageRanges: '1-2',
     }
   }).then((pdf) => pdf.toFile('../dist/chrome2pdf.pdf'))
