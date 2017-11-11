@@ -19,5 +19,5 @@ fs.readFileAsync('cv.html', 'utf8').then((data) => {
         pageRanges: '1-1',
         ignoreInvalidPageRanges: false
     }
-  }).then((pdf) => pdf.toFile('../dist/test.pdf'));
+  }).then((pdf) => pdf.toFile('../dist/chrome2pdf.pdf'));
 });
