@@ -51,6 +51,7 @@
   "dependencies": {
     "chrome-launcher": "^0.8.1",
     "html-pdf-chrome": "^0.4.1",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "wkhtmltopdf": "^0.3.4"
   }
 }
