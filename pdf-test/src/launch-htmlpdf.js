@@ -1,6 +1,8 @@
 const htmlPdf = require('html-pdf-chrome');
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'));
+const PNG = require('pngjs').PNG;
+const pixelmatch = require('pixelmatch');
 
 module.exports = {
     generatePDF: () => {
