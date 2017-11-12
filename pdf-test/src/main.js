@@ -3,6 +3,7 @@ const chromeLauncher = require('./launch-chrome.js');
 const htmlpdf = require('./launch-htmlpdf.js');
 const wkthmltopdf = require('./launch-wkhtml');
 const pdftopng = require('./generate-image');
+const compareImage = require('./compare-images');
 
 chromeLauncher.launchChrome().then(() => {
     console.log('headless chrome running');
@@ -25,10 +26,16 @@ chromeLauncher.launchChrome().then(() => {
         console.log('pdf generation done');
 
         const fileNames = ['wkhtmltopdf.pdf','chrome2pdf.pdf'];
-        const promisesArray = fileNames.map((fileName) => pdftopng.generateImage(fileName));
+        const promiseArray = fileNames.map((fileName) => pdftopng.generateImage(fileName));
 
-        Promise.all(promisesArray).then(() => {
+        Promise.all(promiseArray).then(() => {
             console.log('png generation done');
+
+            // generate comparison image
+            compareImage.generateComparisonImage().then(() => {
+                console.log('Finished');
+                //process.exit(1);
+            });
         });
     }).catch((error) => {
         console.log('Error', error);
