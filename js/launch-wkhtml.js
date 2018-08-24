@@ -1,10 +1,11 @@
 const wkhtmltopdf = require('wkhtmltopdf');
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'));
-const destinationFile = fs.createWriteStream('./dist/wkhtmltopdf.pdf');
 
 module.exports = {
-    generatePDF: () => {
+    generatePDF: ({ inputFileRoot, inputFileName, outputFileRoot, outputFileNameWKHTML }) => {
+        const outputFile = fs.createWriteStream(outputFileRoot + outputFileNameWKHTML);
+
         return new Promise((resolve, reject) => {
             // https://wkhtmltopdf.org/usage/wkhtmltopdf.txt
             const options = {
@@ -20,12 +21,15 @@ module.exports = {
                 disableSmartShrinking: false,
                 //dpi: 72,
                 printMediaType: true
-            }
+            };
 
-            fs.readFileAsync('./src/cv.html', 'utf8').then((data) => {
-                wkhtmltopdf(data.toString(), options).pipe(destinationFile);
-                destinationFile.on('finish', () => resolve());
-                destinationFile.on('error', () => reject());
+            fs.readFileAsync(inputFileRoot + inputFileName, 'utf8').then((data) => {
+                wkhtmltopdf(data.toString(), options)
+                    .pipe(outputFile);
+
+                outputFile
+                    .on('finish', () => resolve())
+                    .on('error', () => reject());
             });
         });
     }

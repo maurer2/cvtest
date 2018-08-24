@@ -1,14 +1,12 @@
 const htmlPdf = require('html-pdf-chrome');
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'));
-const PNG = require('pngjs').PNG;
-const pixelmatch = require('pixelmatch');
 
 module.exports = {
-    generatePDF: () => {
-        return fs.readFileAsync('./src/cv.html', 'utf8').then((data) => {
+    generatePDF: ({ port, inputFileRoot, inputFileName, outputFileRoot, outputFileNameHTMLPDF }) => {
+        return fs.readFileAsync(inputFileRoot + inputFileName, 'utf8').then((data) => {
             htmlPdf.create(data.toString(), {
-                port: 10000,
+                port: port,
                 printOptions: {
                     // https://github.com/adieuadieu/serverless-chrome/pull/14/files
                     // https://chromedevtools.github.io/devtools-protocol/tot/Page/#method-printToPDF
@@ -24,8 +22,9 @@ module.exports = {
                     marginRight: 0.394, // 1cm = 0.394 inch
                     pageRanges: '1-2',
                 }
-            }).then((pdf) => pdf.toFile('./dist/chrome2pdf.pdf'))
-            .catch((error) => console.log(error));
+            })
+                .then((pdf) => pdf.toFile(outputFileRoot + outputFileNameHTMLPDF))
+                .catch((error) => console.log(error));
         });
     }
 }

@@ -4,12 +4,12 @@ const PNG = require('pngjs').PNG;
 const pixelmatch = require('pixelmatch');
 
 module.exports = {
-    generateComparisonImage: () => {
+    generateComparisonImage: ({ outputFileNameWKHTMLPNG, outputFileNameHTMLPDFPNG, outputFileRootResults }) => {
         return new Promise((resolve, reject) => {
             const images = [];
-            const promiseArray = ['chrome2pdf-0.png','wkhtmltopdf-0.png'].map((imageName) => {
+            const promiseArray = [outputFileNameWKHTMLPNG, outputFileNameHTMLPDFPNG].map((imageName) => {
                 return new Promise((resolve, reject) => {
-                    const image = fs.createReadStream('./dist/' + imageName).pipe(new PNG())
+                    const image = fs.createReadStream('./png/' + imageName).pipe(new PNG())
                     .on('parsed', () => {
                         images.push(image);
                         resolve();
@@ -22,12 +22,17 @@ module.exports = {
             })
 
             Promise.all(promiseArray).then(() => {
-                const comparisonImage = new PNG({width: images[0].width, height: images[0].height});
-                pixelmatch(images[0].data, images[1].data, comparisonImage.data, images[0].width, images[0].height, {threshold: 0.1});
-                comparisonImage.pack().pipe(fs.createWriteStream('./dist/comparison-image.png')).on('finish', () => {
-                    console.log('comparison-image generation done');
-                    resolve();
+                const comparisonImage = new PNG({
+                    width: images[0].width,
+                    height: images[0].height
                 });
+
+                pixelmatch(images[0].data, images[1].data, comparisonImage.data, images[0].width, images[0].height, {threshold: 0.1});
+
+                comparisonImage.pack().pipe(fs.createWriteStream('./results/comparison-image.png'))
+                    .on('finish', () => {
+                        resolve();
+                    });
             }).catch((error) => {
                 console.log('Error image-comparison', error);
                 reject();

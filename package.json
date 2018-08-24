@@ -12,14 +12,19 @@
     "compare-pdf": "node index.js"
   },
   "dependencies": {
+    "add": "^2.0.6",
     "bluebird": "^3.5.1",
     "chrome-launcher": "^0.10.2",
+    "emojic": "^1.1.14",
     "eslint": "4.19.1",
+    "fs-extra": "^7.0.0",
     "html-pdf-chrome": "^0.5.0",
     "lodash": "^4.17.10",
     "pdf-image": "^2.0.0",
     "pixelmatch": "^4.0.2",
     "pngjs": "^3.3.3",
-    "wkhtmltopdf": "^0.3.4"
+    "rimraf": "^2.6.2",
+    "wkhtmltopdf": "^0.3.4",
+    "yarn": "^1.9.4"
   }
 }
