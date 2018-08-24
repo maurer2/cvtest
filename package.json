@@ -1,0 +1,25 @@
+{
+  "name": "pdf-comparison",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/maurer2/pdf-comparison.git",
+  "author": "Martin",
+  "license": "MIT",
+  "engines": {
+    "node": ">= 8.0.0"
+  },
+  "scripts": {
+    "compare-pdf": "node index.js"
+  },
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "chrome-launcher": "^0.10.2",
+    "eslint": "4.19.1",
+    "html-pdf-chrome": "^0.5.0",
+    "lodash": "^4.17.10",
+    "pdf-image": "^2.0.0",
+    "pixelmatch": "^4.0.2",
+    "pngjs": "^3.3.3",
+    "wkhtmltopdf": "^0.3.4"
+  }
+}

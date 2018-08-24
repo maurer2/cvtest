@@ -1,7 +1,7 @@
 const wkhtmltopdf = require('wkhtmltopdf');
 const Promise = require('bluebird');
 const fs = Promise.promisifyAll(require('fs'));
-const destinationFile = fs.createWriteStream('../dist/wkhtmltopdf.pdf');
+const destinationFile = fs.createWriteStream('./dist/wkhtmltopdf.pdf');
 
 module.exports = {
     generatePDF: () => {
@@ -22,7 +22,7 @@ module.exports = {
                 printMediaType: true
             }
 
-            fs.readFileAsync('cv.html', 'utf8').then((data) => {
+            fs.readFileAsync('./src/cv.html', 'utf8').then((data) => {
                 wkhtmltopdf(data.toString(), options).pipe(destinationFile);
                 destinationFile.on('finish', () => resolve());
                 destinationFile.on('error', () => reject());

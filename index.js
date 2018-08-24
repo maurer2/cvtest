@@ -1,9 +1,9 @@
 const Promise = require('bluebird');
-const chromeLauncher = require('./launch-chrome.js');
-const htmlpdf = require('./launch-htmlpdf.js');
-const wkthmltopdf = require('./launch-wkhtml');
-const pdftopng = require('./generate-image');
-const compareImage = require('./compare-images');
+const chromeLauncher = require('./src/launch-chrome.js');
+const htmlpdf = require('./src/launch-htmlpdf.js');
+const wkthmltopdf = require('./src/launch-wkhtml');
+const pdftopng = require('./src/generate-image');
+const compareImage = require('./src/compare-images');
 
 chromeLauncher.launchChrome().then(() => {
     console.log('headless chrome running');

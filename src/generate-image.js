@@ -4,7 +4,7 @@ const PDFImage = require('pdf-image').PDFImage;
 module.exports = {
     generateImage: (filename) => {
         return new Promise((resolve, reject) => {
-            const path = '../dist/' + filename;
+            const path = './dist/' + filename;
             const pdfImage = new PDFImage(path, {
                 // https://github.com/mooz/node-pdf-image/issues/3
                 convertOptions: {
@@ -15,9 +15,14 @@ module.exports = {
                 }
             });
 
-            pdfImage.convertPage(0)
-                .then((imagePath) => resolve())
-                .catch((imagePath) => reject())
+            pdfImage.convertFile()
+                .then((imagePath) => {
+                    resolve(imagePath)
+                })
+                .catch((imagePath) => {
+                    reject(imagePath)
+                })
+
         });
     }
 }

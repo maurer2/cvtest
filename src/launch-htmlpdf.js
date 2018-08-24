@@ -6,7 +6,7 @@ const pixelmatch = require('pixelmatch');
 
 module.exports = {
     generatePDF: () => {
-        return fs.readFileAsync('cv.html', 'utf8').then((data) => {
+        return fs.readFileAsync('./src/cv.html', 'utf8').then((data) => {
             htmlPdf.create(data.toString(), {
                 port: 10000,
                 printOptions: {
@@ -24,7 +24,7 @@ module.exports = {
                     marginRight: 0.394, // 1cm = 0.394 inch
                     pageRanges: '1-2',
                 }
-            }).then((pdf) => pdf.toFile('../dist/chrome2pdf.pdf'))
+            }).then((pdf) => pdf.toFile('./dist/chrome2pdf.pdf'))
             .catch((error) => console.log(error));
         });
     }
