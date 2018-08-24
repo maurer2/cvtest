@@ -1,5 +1,4 @@
-const Promise = require('bluebird');
-const fs = Promise.promisifyAll(require('fs'));
+const fs = require('fs-extra');
 const PNG = require('pngjs').PNG;
 const pixelmatch = require('pixelmatch');
 

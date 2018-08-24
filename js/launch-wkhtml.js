@@ -1,6 +1,5 @@
 const wkhtmltopdf = require('wkhtmltopdf');
-const Promise = require('bluebird');
-const fs = Promise.promisifyAll(require('fs'));
+const fs = require('fs-extra');
 
 module.exports = {
     generatePDF: ({ inputFileRoot, inputFileName, outputFileRoot, outputFileNameWKHTML }) => {
@@ -17,13 +16,13 @@ module.exports = {
                 marginLeft: '10mm',
                 marginRight: '10mm',
                 orientation: 'portrait',
-                zoom: 1,
+                zoom: 1.25, // https://github.com/wkhtmltopdf/wkhtmltopdf/issues/3241
                 disableSmartShrinking: false,
-                //dpi: 72,
+                dpi: 300,
                 printMediaType: true
             };
 
-            fs.readFileAsync(inputFileRoot + inputFileName, 'utf8').then((data) => {
+            fs.readFile(inputFileRoot + inputFileName, 'utf8').then((data) => {
                 wkhtmltopdf(data.toString(), options)
                     .pipe(outputFile);
 

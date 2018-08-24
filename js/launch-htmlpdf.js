@@ -1,10 +1,9 @@
 const htmlPdf = require('html-pdf-chrome');
-const Promise = require('bluebird');
-const fs = Promise.promisifyAll(require('fs'));
+const fs = require('fs-extra');
 
 module.exports = {
     generatePDF: ({ port, inputFileRoot, inputFileName, outputFileRoot, outputFileNameHTMLPDF }) => {
-        return fs.readFileAsync(inputFileRoot + inputFileName, 'utf8').then((data) => {
+        return fs.readFile(inputFileRoot + inputFileName, 'utf8').then((data) => {
             htmlPdf.create(data.toString(), {
                 port: port,
                 printOptions: {

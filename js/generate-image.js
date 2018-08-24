@@ -1,4 +1,3 @@
-const Promise = require('bluebird');
 const PDFImage = require('pdf-image').PDFImage;
 const fs = require('fs-extra');
 
